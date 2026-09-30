@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101916">
+  <title>좀비 확산 막기</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+<main class="app">
+  <header><div><p class="eyebrow">GRAPH SURVIVAL · 그래프 생존 게임</p><h1>좀비 확산 막기<span class="title-dot"></span></h1><p class="subtitle">학교에 어둠이 내렸다. 해독제를 찾아, 무사히 돌아오세요.</p></div><button id="reset" class="reset">↻ 다시 시작</button></header>
+  <section class="game" aria-label="학교 지도와 남은 턴">
+    <div class="map-top"><div><span class="live-dot"></span> 봉쇄 구역 <span class="muted">/ 학교 1층</span></div><div class="turn-counter"><span>남은 턴</span> <strong id="remaining">12</strong><span>/ 12</span></div></div>
+    <div class="progress" aria-hidden="true"><div id="time-bar"></div></div>
+    <div class="map-label"><span>학교 연결 지도</span><span>정점 8개 · 간선 13개</span></div>
+    <div class="map-wrap"><svg id="map" viewBox="0 0 900 480" role="group" aria-label="연결된 장소를 선택해 이동하는 학교 지도"><defs><pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse"><path d="M 30 0 L 0 0 0 30" fill="none" stroke="#ffffff" stroke-opacity=".035"/></pattern></defs><rect width="900" height="480" fill="url(#grid)"/><g id="edges"></g><g id="nodes"></g></svg></div>
+    <div class="map-bottom"><div class="legend"><span><i class="player-key"></i>나</span><span><i class="zombie-key"></i>좀비</span><span><i class="antidote-key"></i>해독제</span><span><i class="blocked-key"></i>차단 통로</span></div><span id="map-hint">연결된 장소를 클릭해 이동하세요.</span></div>
+  </section>
+  <div id="result" class="result" role="status" hidden></div>
+  <section class="dashboard">
+    <div class="panel mission"><p class="eyebrow">YOUR MISSION</p><h2>오늘 밤의 목표</h2><div id="mission-one" class="objective"><span class="check">1</span><span>과학실에서 해독제를 확보하세요.</span></div><div id="mission-two" class="objective"><span class="check">2</span><span>해독제를 들고 대피소로 돌아오세요.</span></div></div>
+    <div class="panel resources"><div class="stats"><div><span class="stat-label">바리케이드</span><p><strong id="barricades">3</strong><span>개 남음</span></p></div><div><span class="stat-label">이동거리</span><p><strong id="distance">0</strong><span>칸 이동</span></p></div></div><div class="actions"><button id="barricade-mode" aria-pressed="false">▥ 바리케이드 설치 모드</button><button id="next-turn">다음 턴 진행 →</button></div><p class="small">이동 · 설치 · 대기는 각각 1턴을 사용합니다.</p></div>
+    <div class="panel location"><p class="eyebrow">CURRENT LOCATION</p><div class="location-heading"><h2 id="location">정문</h2><span id="safety" class="badge">안전</span></div><p id="location-description">연결된 통로를 살펴보세요.</p><div id="inventory">✚ 해독제 미확보</div></div>
+    <div class="panel instructions"><h2>플레이 방법</h2><ul><li>나와 연결된 장소를 클릭하면 한 칸 이동합니다.</li><li>좀비는 매 턴 나를 향해 한 칸씩 이동합니다.</li><li>통로를 차단하면 나와 좀비 모두 지나갈 수 없습니다.</li><li>좀비에게 잡히거나 시간이 끝나면 게임 오버입니다.</li></ul><p class="small">설치 모드에서 지도 위 통로를 선택하세요. 좀비는 최단 경로가 여러 개면 무작위로 선택합니다.</p></div>
+  </section>
+  <section class="panel history"><div class="history-heading"><h2>상황 기록</h2><span>MISSION LOG</span></div><ol id="log" aria-live="polite" aria-relevant="additions"></ol></section>
+  <footer>매 턴의 선택이 생존을 결정합니다. <span>12 TURNS. ONE WAY HOME.</span></footer>
+</main>
+</body>
+</html>
